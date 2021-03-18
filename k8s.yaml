@@ -64,3 +64,32 @@ spec:
       containers:
       - name: php-redis
         image: gcr.io/google_samples/gb-frontend:v3
+     
+---     
+# ConfigMap .yaml file
+apiVersion: v1
+kind: ConfigMap
+metadata: 
+  name: myconfig
+data:
+  env: dev
+  
+### Injecting config maps to the pods
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: web
+  labels:
+    role: webserver
+spec:
+  containers:
+    - name: web
+      image: nginx
+      ports:
+        - name: web
+          containerPort: 80
+          protocol: TCP
+      envFrom:
+        - configMapRef:
+            name: myconfig
