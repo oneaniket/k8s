@@ -1,0 +1,77 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: volumes-hostpath
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        run: volumes-hostpath
+    spec:
+      volumes:
+        - name: task-pv-storage
+          hostPath:
+            path: /home/openapianil/samplePV
+            type: Directory
+      containers:
+      - name: nginx
+        image: nginx
+        ports:
+        - containerPort: 80
+        volumeMounts:
+         - name: task-pv-storage
+           mountPath: /mnt/sample
+           
+           
+# Create persistent volume
+---
+apiVersion: v1
+kind: PersistentVolume
+   name: persistent-volume
+   labels:
+      type: local
+spec:
+   capacity: 
+      storage: 10Gi
+   accessModes:
+      - ReadWriteOnce 
+      hostPath:
+         path: "/tmp/data01" 
+         
+# Create peristent volume claim
+---
+apiVersion: v1
+kind: PersistentVolumeClaim 
+metadata:
+   name: myclaim
+spec:
+   accessModes:
+      - ReadWriteOnce
+   resources:
+      requests:
+         storage: 3Gi
+         
+# Using PVC in pod
+---
+kind: Pod
+apiVersion: v1
+metadata:
+   name: mypod
+   labels:
+      name: frontendhttp
+spec:
+   containers:
+   - name: myfrontend
+      image: nginx
+      ports:
+      - containerPort: 80
+         name: "http-server"
+      volumeMounts:
+      - mountPath: "/usr/share/tomcat/html"
+         name: mypd
+   volumes: 
+      - name: mypd
+         persistentVolumeClaim:
+         claimName: myclaim
