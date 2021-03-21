@@ -76,7 +76,6 @@ kind: PersistentVolumeClaim
 metadata:
   name: pv-claim-demo
 spec:
-  storageClassName: "example-storageclass"
   accessModes:
     - ReadWriteOnce
   resources:
