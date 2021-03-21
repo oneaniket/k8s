@@ -14,6 +14,8 @@ spec:
         - name: web
           containerPort: 80
           protocol: TCP
+  nodeSelector:
+    web: nginx
           
           
 
