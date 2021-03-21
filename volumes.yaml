@@ -61,7 +61,7 @@ metadata:
   name: pv-demo
 spec:
   capacity:
-    storage: 500G
+    storage: 10Gi
   accessModes:
     - ReadWriteOnce
   claimRef:
@@ -80,7 +80,7 @@ spec:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 500G
+      storage: 10Gi
 #####################################################################################
 # Using PVC in pod
 ---
