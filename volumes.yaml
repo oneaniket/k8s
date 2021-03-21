@@ -97,10 +97,10 @@ spec:
      ports:
       - containerPort: 80
          name: "http-server"
-      volumeMounts:
+    volumeMounts:
       - mountPath: "/usr/share/tomcat/html"
          name: mypd
    volumes: 
       - name: mypd
          persistentVolumeClaim:
-         claimName: myclaim
+           claimName: myclaim
