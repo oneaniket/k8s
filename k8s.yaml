@@ -93,3 +93,33 @@ spec:
       envFrom:
         - configMapRef:
             name: myconfig
+
+## Creating secrets
+# ConfigMap .yaml file
+apiVersion: v1
+kind: Secret
+metadata: 
+  name: mysecret
+data:
+  username: admin
+  password: password
+  
+### Injecting secrets to the pods
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: web
+  labels:
+    role: webserver
+spec:
+  containers:
+    - name: web
+      image: nginx
+      ports:
+        - name: web
+          containerPort: 80
+          protocol: TCP
+      envFrom:
+        - secretRef:
+            name: mysecret
