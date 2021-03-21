@@ -21,6 +21,9 @@
 | kubectl rollout undo deployment nginx | Rollback to previous deployment |
 | kubectl apply -f filename | Deploy objects defined in the file|
 | kubectl delete -f filename | Delete objects defined in the file |
-
+| kubectl expose deployment nginx --type NodePort --port 80 --target-port 80 | Expose deployment nginx with NodePort service |
+| kubectl get pods --selector app=apache | Get all pods with label app=apache | 
+| kuebctl create configmap myconfig --from-literal=env=dev | Create configmap imperative command |
+| kubectl create secret generic mysecret1 --from-literal=username=admin | Create secret with imperative command |
 
 
