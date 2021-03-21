@@ -93,8 +93,8 @@ metadata:
 spec:
    containers:
    - name: myfrontend
-      image: nginx
-      ports:
+     image: nginx
+     ports:
       - containerPort: 80
          name: "http-server"
       volumeMounts:
