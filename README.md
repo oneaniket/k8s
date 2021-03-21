@@ -25,5 +25,8 @@
 | kubectl get pods --selector app=apache | Get all pods with label app=apache | 
 | kuebctl create configmap myconfig --from-literal=env=dev | Create configmap imperative command |
 | kubectl create secret generic mysecret1 --from-literal=username=admin | Create secret with imperative command |
+| kubectl get pods/nodes --show-labels | View lables on object |
+| kubectl lable nodes name_of_node key=value | Add label to specified node |
+
 
 
